@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body,
+    html {
+      padding: 0;
+      margin: 0;
+      background-color: rgba(10, 10, 10, 0.747);
+    }
+
+    .box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 1200px;
+      margin: auto 0;
+    }
+
+    .item {
+      /* cursor: pointer; */
+      border-radius: 3px;
+      margin-bottom: 4px;
+      width: 320px;
+      height: 45px;
+      background-color: red;
+    }
+
+    .item:nth-child(2) {
+      background-color: #71d266;
+    }
+
+    .item:nth-child(3) {
+      background-color: #da8217;
+    }
+
+    .item:nth-child(4) {
+      background-color: #da17ba;
+    }
+
+    .item:nth-child(5) {
+      background-color: #b6da17;
+    }
+
+    .item:nth-child(6) {
+      background-color: #1d5e30;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div draggable="true" class="item">1</div>
+    <div draggable="true" class="item">2</div>
+    <div draggable="true" class="item">3</div>
+    <div draggable="true" class="item">4</div>
+    <div draggable="true" class="item">5</div>
+    <div draggable="true" class="item">6</div>
+  </div>
+</body>
+<script>
+  const box = document.querySelector('.box');
+  const item = document.querySelectorAll('.item');
+  console.log(box);
+  // console.log(item[1].outerHTML);
+
+  box.ondragover = (e) => {
+    e.preventDefault();
+  };
+
+  let io;
+  box.ondragstart = e => {
+    console.log('ondragstart', e.target);
+    console.log('ondragstart', e);
+    io = e.target;
+    // 设置拖动效果
+    e.dataTransfer.effectAllowed = 'copy'
+  };
+
+
+  box.ondragenter = (e) => { // 每个元素时触发
+    // console.log('ondragenter',e);
+  };
+
+  box.ondrop = (ev) => { // 结束
+    const p = window.document.createElement("div");//创建的虚拟节点 
+    p.innerText = 'dsdas';
+    p.className = 'item';
+    console.log(item);
+    item[1].innerText = '8888';
+    item[1].style['background-color'] = 'red';
+    // ev.target.appendChild(p);
+    ev.preventDefault();
+  }
+
+</script>
+
+</html>
